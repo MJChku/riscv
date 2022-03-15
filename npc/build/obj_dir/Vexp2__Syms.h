@@ -4,33 +4,31 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VMUL41__SYMS_H_
-#define VERILATED_VMUL41__SYMS_H_  // guard
+#ifndef VERILATED_VEXP2__SYMS_H_
+#define VERILATED_VEXP2__SYMS_H_  // guard
 
 #include "verilated_heavy.h"
 
 // INCLUDE MODEL CLASS
 
-#include "Vmul41.h"
+#include "Vexp2.h"
 
 // INCLUDE MODULE CLASSES
-#include "Vmul41___024root.h"
+#include "Vexp2___024root.h"
 
 // SYMS CLASS (contains all model state)
-class Vmul41__Syms final : public VerilatedSyms {
+class Vexp2__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    Vmul41* const __Vm_modelp;
-    bool __Vm_activity = false;  ///< Used by trace routines to determine change occurred
-    uint32_t __Vm_baseCode = 0;  ///< Used by trace routines when tracing multiple models
+    Vexp2* const __Vm_modelp;
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    Vmul41___024root               TOP;
+    Vexp2___024root                TOP;
 
     // CONSTRUCTORS
-    Vmul41__Syms(VerilatedContext* contextp, const char* namep, Vmul41* modelp);
-    ~Vmul41__Syms();
+    Vexp2__Syms(VerilatedContext* contextp, const char* namep, Vexp2* modelp);
+    ~Vexp2__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }
