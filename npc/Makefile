@@ -12,10 +12,13 @@ commit:
 
 include ../Makefile
 
-NXDC_FILES := constr/top.nxdc
+NXDC_FILES := constr/$(TOPNAME).nxdc
 
 VERILATOR = verilator
 VERILATOR_CFLAGS += -MMD -MP -build -cc -O3 --x-assign fast --x-initial fast --noassert
+ifeq ($(TRACE), y)
+VERILATOR_CFLAGS += --trace
+endif
 
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
