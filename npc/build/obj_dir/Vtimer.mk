@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vexp3.mk
+#    make -f Vtimer.mk
 
-default: /home/mjc/onelife/PA0/ysyx-workbench/npc/build/exp3
+default: /home/mjc/onelife/PA0/ysyx-workbench/npc/build/timer
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,39 +30,49 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vexp3
+VM_PREFIX = Vtimer
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vexp3
+VM_MODPREFIX = Vtimer
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DTOP_NAME="Vexp3" \
+	-I/home/mjc/onelife/PA0/ysyx-workbench/nvboard/include \
+	-DTOP_NAME="Vtimer" \
+	-DNVBOARD=1 \
+	-DTRACE=0 \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	/home/mjc/onelife/PA0/ysyx-workbench/nvboard/build/nvboard.a \
+	-lSDL2 \
+	-lSDL2_image \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	auto_bind \
 	main \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
+	/home/mjc/onelife/PA0/ysyx-workbench/npc/build \
 	/home/mjc/onelife/PA0/ysyx-workbench/npc/csrc \
 
 
 ### Default rules...
 # Include list of all generated classes
-include Vexp3_classes.mk
+include Vtimer_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+auto_bind.o: /home/mjc/onelife/PA0/ysyx-workbench/npc/build/auto_bind.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 main.o: /home/mjc/onelife/PA0/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/mjc/onelife/PA0/ysyx-workbench/npc/build/exp3: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/mjc/onelife/PA0/ysyx-workbench/npc/build/timer: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

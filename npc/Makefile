@@ -41,10 +41,11 @@ CFLAGS += $(INC) -DTOP_NAME="\"V$(TOPNAME)\""
 
 ifeq ($(NVBOARD),y)
 $(NVBOARD_SRC_AUTO_BIND): $(NXDC_FILES) 
-python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
+	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
 CSRCS += $(NVBOARD_SRC_AUTO_BIND)                       
 include $(NVBOARD_HOME)/scripts/nvboard.mk
 LDFLAGS += -lSDL2 -lSDL2_image
+CFLAGS += -DNVBOARD="1" -DTRACE="0" 
 # nvboard_archive is from other makefile
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
@@ -52,7 +53,7 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 	--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))	
 else
-
+CFLAGS += -DNVBOARD="0" -DTRACE="1" 
 $(BIN): $(VSRCS) $(CSRCS)
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) -top $(TOPNAME) $^ \
