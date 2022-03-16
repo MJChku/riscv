@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtimer__Syms.h"
-#include "Vtimer.h"
-#include "Vtimer___024root.h"
+#include "Vlfsr__Syms.h"
+#include "Vlfsr.h"
+#include "Vlfsr___024root.h"
 
 // FUNCTIONS
-Vtimer__Syms::~Vtimer__Syms()
+Vlfsr__Syms::~Vlfsr__Syms()
 {
 }
 
-Vtimer__Syms::Vtimer__Syms(VerilatedContext* contextp, const char* namep,Vtimer* modelp)
+Vlfsr__Syms::Vlfsr__Syms(VerilatedContext* contextp, const char* namep,Vlfsr* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp(modelp)

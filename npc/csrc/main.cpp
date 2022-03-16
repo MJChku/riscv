@@ -1,4 +1,4 @@
-#include "Vtimer.h"
+#include "Vlfsr.h"
 #include "verilated.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -70,12 +70,20 @@ void sim_exit(){
 
 int main(int argc, char** argv, char** env){
 	sim_init(argc, argv);
+	
+	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
+	
 
 	while(!contextp->gotFinish() ){ 
-	
-		top->enable=1; top->pause = 0; top->reset = 0; 
-		top->clk=0; step_and_dump_wave();
-		top->clk=1; step_and_dump_wave();
+		top->clk=0; top->ctl = 6; step_and_dump_wave();
+		top->clk=1; top->ctl = 6; step_and_dump_wave();
 		
 	}
 	

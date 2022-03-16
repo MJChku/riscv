@@ -5,19 +5,19 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VTIMER_H_
-#define VERILATED_VTIMER_H_  // guard
+#ifndef VERILATED_VLFSR_H_
+#define VERILATED_VLFSR_H_  // guard
 
 #include "verilated_heavy.h"
 
-class Vtimer__Syms;
-class Vtimer___024root;
+class Vlfsr__Syms;
+class Vlfsr___024root;
 
 // This class is the main interface to the Verilated model
-class Vtimer VL_NOT_FINAL {
+class Vlfsr VL_NOT_FINAL {
   private:
     // Symbol table holding complete model state (owned by this class)
-    Vtimer__Syms* const vlSymsp;
+    Vlfsr__Syms* const vlSymsp;
 
   public:
 
@@ -25,9 +25,8 @@ class Vtimer VL_NOT_FINAL {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
-    VL_IN8(&enable,0,0);
-    VL_IN8(&pause,0,0);
-    VL_IN8(&reset,0,0);
+    VL_IN8(&ctl,2,0);
+    VL_IN8(&din,7,0);
     VL_OUT8(&hex0,6,0);
     VL_OUT8(&hex1,6,0);
 
@@ -37,19 +36,19 @@ class Vtimer VL_NOT_FINAL {
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    Vtimer___024root* const rootp;
+    Vlfsr___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit Vtimer(VerilatedContext* contextp, const char* name = "TOP");
-    explicit Vtimer(const char* name = "TOP");
+    explicit Vlfsr(VerilatedContext* contextp, const char* name = "TOP");
+    explicit Vlfsr(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~Vtimer();
+    virtual ~Vlfsr();
   private:
-    VL_UNCOPYABLE(Vtimer);  ///< Copying not allowed
+    VL_UNCOPYABLE(Vlfsr);  ///< Copying not allowed
 
   public:
     // API METHODS

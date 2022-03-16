@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vtimer.mk
+#    make -f Vlfsr.mk
 
-default: /home/mjc/onelife/PA0/ysyx-workbench/npc/build/timer
+default: /home/mjc/onelife/PA0/ysyx-workbench/npc/build/lfsr
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,13 +30,13 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vtimer
+VM_PREFIX = Vlfsr
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vtimer
+VM_MODPREFIX = Vlfsr
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/mjc/onelife/PA0/ysyx-workbench/nvboard/include \
-	-DTOP_NAME="Vtimer" \
+	-DTOP_NAME="Vlfsr" \
 	-DNVBOARD=1 \
 	-DTRACE=0 \
 
@@ -59,7 +59,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vtimer_classes.mk
+include Vlfsr_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -72,7 +72,7 @@ main.o: /home/mjc/onelife/PA0/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/mjc/onelife/PA0/ysyx-workbench/npc/build/timer: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/mjc/onelife/PA0/ysyx-workbench/npc/build/lfsr: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

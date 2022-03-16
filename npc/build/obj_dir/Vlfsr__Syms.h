@@ -4,31 +4,31 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VTIMER__SYMS_H_
-#define VERILATED_VTIMER__SYMS_H_  // guard
+#ifndef VERILATED_VLFSR__SYMS_H_
+#define VERILATED_VLFSR__SYMS_H_  // guard
 
 #include "verilated_heavy.h"
 
 // INCLUDE MODEL CLASS
 
-#include "Vtimer.h"
+#include "Vlfsr.h"
 
 // INCLUDE MODULE CLASSES
-#include "Vtimer___024root.h"
+#include "Vlfsr___024root.h"
 
 // SYMS CLASS (contains all model state)
-class Vtimer__Syms final : public VerilatedSyms {
+class Vlfsr__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    Vtimer* const __Vm_modelp;
+    Vlfsr* const __Vm_modelp;
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    Vtimer___024root               TOP;
+    Vlfsr___024root                TOP;
 
     // CONSTRUCTORS
-    Vtimer__Syms(VerilatedContext* contextp, const char* namep, Vtimer* modelp);
-    ~Vtimer__Syms();
+    Vlfsr__Syms(VerilatedContext* contextp, const char* namep, Vlfsr* modelp);
+    ~Vlfsr__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }
