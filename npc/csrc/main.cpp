@@ -1,4 +1,4 @@
-#include "Vlfsr.h"
+#include "Vkeyboard_fsm.h"
 #include "verilated.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -67,25 +67,33 @@ void sim_exit(){
 
 }
 
+void reset_single_cycle(){
+	top->clk=0; top->eval();
+	top->clk=1; top->eval();
+}
+
+void reset(int n){
+	top->reset = 1;
+	while(n-->0) reset_single_cycle();
+	top->reset = 0;
+}
+
 
 int main(int argc, char** argv, char** env){
 	sim_init(argc, argv);
-	
-	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=0; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	top->clk=1; top->ctl = 1; top->din = 1; step_and_dump_wave();
-	
-
-	while(!contextp->gotFinish() ){ 
-		top->clk=0; top->ctl = 6; step_and_dump_wave();
-		top->clk=1; top->ctl = 6; step_and_dump_wave();
-		
-	}
+	reset(10);
+	top->clk=0; top->raw = 0x35; step_and_dump_wave();
+	top->clk=1; top->raw = 0x35; step_and_dump_wave();
+	top->clk=0; top->raw = 0x35; step_and_dump_wave();
+	top->clk=1; top->raw = 0x35; step_and_dump_wave();
+	top->clk=0; top->raw = 0x00; step_and_dump_wave();
+	top->clk=1; top->raw = 0x00; step_and_dump_wave();
+	top->clk=0; top->raw = 0xf0; step_and_dump_wave();
+	top->clk=1; top->raw = 0xf0; step_and_dump_wave();
+	top->clk=0; top->raw = 0x35; step_and_dump_wave();
+	top->clk=1; top->raw = 0x35; step_and_dump_wave();
+	top->clk=0; top->raw = 0x00; step_and_dump_wave();
+	top->clk=1; top->raw = 0x00; step_and_dump_wave();
 	
 	sim_exit();
 	return 0;
